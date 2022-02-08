@@ -1,0 +1,14 @@
+.profileEdit__name {
+  width: 83%;
+  min-height: 27px;
+  margin: 54px auto 0;
+  font-size: .875rem;
+  line-height: 1.05875rem;
+  border-style: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+
+}
+
+.profileEdit__name:focus {
+  outline: none;
+}

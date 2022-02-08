@@ -1,0 +1,10 @@
+.profileEdit__closeButton {
+  width: 32px;
+  align-self: flex-end;
+  z-index: 2;
+}
+
+.profileEdit__closeButton:hover {
+  opacity: .6;
+  cursor: pointer;
+}

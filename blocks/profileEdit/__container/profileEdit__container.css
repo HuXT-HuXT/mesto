@@ -1,0 +1,6 @@
+.profileEdit__container {
+  width: 470px;
+  height: 370px;
+  display: flex;
+  flex-direction: column;
+}

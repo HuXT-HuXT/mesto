@@ -1,0 +1,9 @@
+.profileEdit__form {
+  max-width: 430px;
+  height: 330px;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 10px;
+}

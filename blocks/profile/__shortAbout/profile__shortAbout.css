@@ -1,0 +1,16 @@
+.profile__shortAbout {
+  margin: 0;
+  padding-top: 16px;
+  font-size: 1.125rem;
+  line-height: 1.36125rem;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 450px) {
+  .profile__shortAbout {
+  font-size: .875rem;
+  line-height: 1.05875rem;
+  text-align: center;
+  }
+}
+

@@ -1,0 +1,5 @@
+.element__likeButton_enabled {
+  background-image: url(../../../../images/Heart_active.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}

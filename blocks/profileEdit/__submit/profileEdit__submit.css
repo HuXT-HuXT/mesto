@@ -1,0 +1,19 @@
+.profileEdit__submit {
+  width: 83%;
+  min-height: 50px;
+  margin: 30px auto 0;
+  font-size: 1.125rem;
+  line-height: 1.36125rem;
+  border: none;
+  color: #fff;
+  background-color: #000;
+}
+
+.profileEdit__submit:focus {
+  outline: none;
+}
+
+.profileEdit__submit:hover {
+  opacity: .8;
+  cursor: pointer;
+}
