@@ -17,13 +17,6 @@ closeButton.addEventListener('click', () => {
   console.log('clicked');
 });
 
-console.log(nameInput.value);
-console.log(aboutInput.value);
-
-let x = aboutInput.value;
-
-console.log(x);
-
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 function formSubmitHandler(evt) {
@@ -44,4 +37,4 @@ function formSubmitHandler(evt) {
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-submitButton.addEventListener('click', formSubmitHandler);
+profileEdit.addEventListener('submit', formSubmitHandler);

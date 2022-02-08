@@ -8,3 +8,9 @@
   opacity: .6;
   cursor: pointer;
 }
+
+@media screen and (max-width: 450px) {
+  .profileEdit__closeButton {
+    width: 20px;
+  }
+}
