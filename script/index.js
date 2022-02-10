@@ -1,9 +1,9 @@
-let wholePage = document.querySelector('.page');
-let profile = wholePage.querySelector('.profile');
-let editButton = profile.querySelector('.profile__editButton');
-let profileEdit = wholePage.querySelector('.profileEdit');
-let closeButton = profileEdit.querySelector('.profileEdit__closeButton');
-let submitButton = profileEdit.querySelector('.profileEdit__submit');
+const wholePage = document.querySelector('.page');
+const profile = wholePage.querySelector('.profile');
+const editButton = profile.querySelector('.profile__editButton');
+const profileEdit = wholePage.querySelector('.profileEdit');
+const closeButton = profileEdit.querySelector('.profileEdit__closeButton');
+const submitButton = profileEdit.querySelector('.profileEdit__submit');
 let nameInput = profileEdit.querySelector('.profileEdit__name');
 let aboutInput = profileEdit.querySelector('.profileEdit__about');
 
@@ -38,3 +38,5 @@ function formSubmitHandler(evt) {
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 profileEdit.addEventListener('submit', formSubmitHandler);
+
+
