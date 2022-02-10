@@ -23,7 +23,8 @@
 @import url(../blocks/element/__photo/element__photo.css);
 @import url(../blocks/element/__description/element__description.css);
 @import url(../blocks/element/__likeButton/element__likeButton.css);
-@import url(../blocks/element/__likeButton/__likeButton_disabled/element__likeButton_disabled.css);
+@import url(../blocks/element/__likeButton/_enabled/element__likeButton_enabled.css);
+@import url(../blocks/element/__likeButton/_disabled/element__likeButton_disabled.css);
 @import url(../blocks/element/__name/element__name.css);
 
 @import url(../blocks/footer/footer.css);
