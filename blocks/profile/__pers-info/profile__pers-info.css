@@ -1,0 +1,9 @@
+.profile__pers-info {
+  display: flex;
+}
+
+@media screen and (max-width: 450px) {
+  .profile__pers-info {
+    flex-direction: column;
+  }
+}

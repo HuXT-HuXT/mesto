@@ -1,0 +1,19 @@
+.profile__name-form {
+  width: 336px;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 500px) {
+  .profile__name-form {
+    width: 285px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .profile__name-form {
+    padding-top: 26px;
+    justify-content: center;
+  }
+}
+

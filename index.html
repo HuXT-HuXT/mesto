@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./pages/index.css">
 </head>
 <!---->
-<body class="the-mainest">
+<body class="body">
   <div class="page">
 
     <header class="header">
@@ -18,60 +18,60 @@
     <main>
 
       <section class="profile">
-        <div class="profile__persInfo">
-          <img src="./images/Jan_Jack.jpg" alt="То ли Жан, то ли Жак, то ли Жар" class="profile__photo">
+        <div class="profile__pers-info">
+          <img src="./images/jan_jack.jpg" alt="То ли Жан, то ли Жак, то ли Жар" class="profile__photo">
           <div class="profile__description">
-            <div class="profile__nameForm">
+            <div class="profile__name-form">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
-              <img src="./images/Edit_Button.svg" alt="Изменить" class="profile__editButton">
+              <button type="button" class="profile__edit-button"></button>
             </div>
-            <p class="profile__shortAbout">Исследователь океана</p>
+            <p class="profile__short-about">Исследователь океана</p>
           </div>
         </div>
-        <div class="profile__addButton"></div>
+        <button type="button" class="profile__add-button"></button>
       </section>
 
       <section class="elements">
         <div class="element">
-          <img src="./images/Karachaevsk.jpg" alt="Фото" class="element__photo">
+          <img src="./images/karachaevsk.jpg" alt="Фото" class="element__photo">
           <div class="element__description">
             <h2 class="element__name">Карачаевск</h2>
-            <div class="element__likeButton element__likeButton_disabled"></div>
+            <button type="button" class="element__like-button element__like-button_disabled"></button>
           </div>
         </div>
         <div class="element">
-          <img src="./images/DomBay.png" alt="Фото" class="element__photo">
+          <img src="./images/dombay.png" alt="Фото" class="element__photo">
           <div class="element__description">
             <h2 class="element__name">Домбай</h2>
-            <div class="element__likeButton element__likeButton_disabled"></div>
+            <button type="button" class="element__like-button element__like-button_disabled"></button>
           </div>
         </div>
         <div class="element">
-          <img src="./images/Elbrus.png" alt="Фото" class="element__photo">
+          <img src="./images/elbrus.png" alt="Фото" class="element__photo">
           <div class="element__description">
             <h2 class="element__name">Эльбрус</h2>
-            <div class="element__likeButton element__likeButton_disabled"></div>
+            <button type="button" class="element__like-button element__like-button_disabled"></button>
           </div>
         </div>
         <div class="element">
-          <img src="./images/DomBay.png" alt="Фото" class="element__photo">
+          <img src="./images/dombay.png" alt="Фото" class="element__photo">
           <div class="element__description">
             <h2 class="element__name">Домбай</h2>
-            <div class="element__likeButton element__likeButton_disabled"></div>
+            <button type="button" class="element__like-button element__like-button_disabled"></button>
           </div>
         </div>
         <div class="element">
-          <img src="./images/Elbrus.png" alt="Фото" class="element__photo">
+          <img src="./images/elbrus.png" alt="Фото" class="element__photo">
           <div class="element__description">
             <h2 class="element__name">Эльбрус</h2>
-            <div class="element__likeButton element__likeButton_disabled"></div>
+            <button type="button" class="element__like-button element__like-button_disabled"></button>
           </div>
         </div>
         <div class="element">
-          <img src="./images/Karachaevsk.jpg" alt="Фото" class="element__photo">
+          <img src="./images/karachaevsk.jpg" alt="Фото" class="element__photo">
           <div class="element__description">
             <h2 class="element__name">Карачаево-Черкесия</h2>
-            <div class="element__likeButton element__likeButton_disabled"></div>
+            <button type="button" class="element__like-button element__like-button_disabled"></button>
           </div>
         </div>
       </section>
@@ -82,17 +82,19 @@
       <p class="footer__text">&copy; 2022 Mesto Russia</p>
     </footer>
 
-    <section class="profileEdit">
-      <div class="profileEdit__container">
-        <img src="./images/Close_icon.svg" alt="Закрыть" class="profileEdit__closeButton">
-        <form action="#" class="profileEdit__form">
-          <h3 class="profileEdit__title">Редактировать профиль</h3>
-          <input type="text" class="profileEdit__name" value="Жак-Ив Кусто">
-          <input type="text" class="profileEdit__about" value="Исследователь океана">
-          <input type="submit" class="profileEdit__submit" value="Сохранить">
+    <div class="popup">
+      <!-- Сударыня, прошу прощения, но выполнить вашу просьбу положительно невозможно. Ибо данная
+      конструкция разделяет кнопку закрытия и форму.-->
+      <div class="popup__container">
+        <button type="button" class="popup__close-button"></button>
+        <form action="#" class="popup__form">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <input type="text" class="popup__input popup__input_name" name="form-name">
+          <input type="text" class="popup__input popup__input_about" name="form-about">
+          <input type="submit" class="popup__submit" value="Сохранить">
         </form>
       </div>
-    </section>
+    </div>
 
   </div>
   <script src="./script/index.js"></script>

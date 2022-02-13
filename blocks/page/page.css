@@ -12,6 +12,7 @@
   color: #fff;
   background-color: #000;
   opacity: 1;
+  box-sizing: border-box;
 }
 
 

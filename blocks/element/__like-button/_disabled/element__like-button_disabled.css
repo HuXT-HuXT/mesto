@@ -1,0 +1,6 @@
+.element__like-button_disabled {
+  background-image: url(../../../../images/heart.svg);
+  background-size: fill;
+  background-position: center;
+  background-repeat: no-repeat;
+}

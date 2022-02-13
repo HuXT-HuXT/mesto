@@ -1,6 +1,7 @@
 .element__name {
+  max-width: 73%;
   margin: 0;
-  padding: 25px 0 31px 21px;
+  padding: 25px 0 25px 21px;
   font-size: 1.5rem;
   line-height: 1.8125rem;
   font-weight: 900;

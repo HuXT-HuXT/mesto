@@ -1,42 +1,40 @@
 const wholePage = document.querySelector('.page');
 const profile = wholePage.querySelector('.profile');
-const editButton = profile.querySelector('.profile__editButton');
-const profileEdit = wholePage.querySelector('.profileEdit');
-const closeButton = profileEdit.querySelector('.profileEdit__closeButton');
-const submitButton = profileEdit.querySelector('.profileEdit__submit');
-let nameInput = profileEdit.querySelector('.profileEdit__name');
-let aboutInput = profileEdit.querySelector('.profileEdit__about');
+const editButton = profile.querySelector('.profile__edit-button');
+const popup = wholePage.querySelector('.popup');
+const closeButton = popup.querySelector('.popup__close-button');
 
-editButton.addEventListener('click', () => {
-  profileEdit.classList.add('profileEdit_opened');
-  console.log('clicked');
-});
+let nameInput = popup.querySelector('.popup__input_name');
+let aboutInput = popup.querySelector('.popup__input_about');
 
-closeButton.addEventListener('click', () => {
-  profileEdit.classList.remove('profileEdit_opened');
-  console.log('clicked');
-});
+let oldName = profile.querySelector('.profile__name');
+let oldAbout = profile.querySelector('.profile__short-about');
 
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
+function showPopup() {
+  popup.classList.add('popup_opened');
+  nameInput.value = oldName.textContent;
+  aboutInput.value = oldAbout.textContent;
+};
+
+function hidePopup() {
+  popup.classList.remove('popup_opened');
+};
+
 function formSubmitHandler(evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-                                                // Так мы можем определить свою логику отправки.
-                                                // О том, как это делать, расскажем позже.
-    let newName = nameInput.value;
-    let newAbout = aboutInput.value;
-    // Получите значение полей jobInput и nameInput из свойства value
-    let oldName = profile.querySelector('.profile__name');
-    let oldAbout = profile.querySelector('.profile__shortAbout');
-    // Выберите элементы, куда должны быть вставлены значения полей
-    oldName.textContent = newName;
-    oldAbout.textContent = newAbout;
-    // Вставьте новые значения с помощью textContent
-    profileEdit.classList.remove('profileEdit_opened');
-}
+  evt.preventDefault();
 
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
-profileEdit.addEventListener('submit', formSubmitHandler);
+  let newName = nameInput.value;
+  let newAbout = aboutInput.value;
 
+  oldName.textContent = newName;
+  oldAbout.textContent = newAbout;
+
+  hidePopup();
+};
+
+editButton.addEventListener('click', showPopup);
+
+closeButton.addEventListener('click', hidePopup);
+
+popup.addEventListener('submit', formSubmitHandler);
 
