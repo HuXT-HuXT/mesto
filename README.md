@@ -12,4 +12,4 @@ improvement plan: add script to proccess click on add button
 
 
 
-* https://huxt-huxt.github.io/mesto/
+* https://huxt-huxt.github.io/mesto/index.html
