@@ -1,0 +1,5 @@
+.element__photo-part {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+}

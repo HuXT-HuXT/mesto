@@ -4,3 +4,10 @@
   justify-content: center;
   padding-left: 30px;
 }
+
+@media screen and (max-width: 450px) {
+  .profile__description {
+    align-self: center;
+    padding-left: 19px;
+  }
+}
