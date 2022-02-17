@@ -12,5 +12,5 @@ improvement plan: add script to proccess click on add button
 
 
 
-* https://huxt-huxt.github.io/mesto/index.html
-из-за изменения имени изображений, гитхаб отказывается их показывать(
+* https://huxt-huxt.github.io/mesto
+
