@@ -1,4 +1,4 @@
-.popup {
+.photoup {
   position: fixed;
   display: flex;
   top: 0;
@@ -10,7 +10,6 @@
   opacity: 0;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, .9);
   z-index: 2;
 }
-
