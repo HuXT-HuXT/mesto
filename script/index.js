@@ -66,7 +66,7 @@ function showPopup(evt) {
     aboutInput.placeholder = 'Ссылка на картинку';
     nameInput.value = '';
     aboutInput.value = '';
-    submitButton.classList.add('.popup__from_add');
+    submitButton.classList.add('popup__from_add');
   }
   popup.classList.add('popup_opened');
 };
@@ -82,12 +82,12 @@ function hidePhotoup() {
 function formSubmitHandler(evt) {
   evt.preventDefault();
 
-  if (submitButton.classList.contains('.popup__from_add')) {
+  if (submitButton.classList.contains('popup__from_add')) {
     let newName = nameInput.value;
     let newLink = aboutInput.value;
 
     loadCards(newName, newLink);
-    submitButton.classList.remove('.popup__from_add');
+    submitButton.classList.remove('popup__from_add');
   } else {
     let newName = nameInput.value;
     let newAbout = aboutInput.value;
