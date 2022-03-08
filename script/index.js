@@ -28,87 +28,112 @@ const initialCards = [
 const wholePage = document.querySelector('.page');
 
 const profile = wholePage.querySelector('.profile');
-const editButton = profile.querySelector('.profile__edit-button');
-const addButton = profile.querySelector('.profile__add-button');
+const profileButtonEdit = profile.querySelector('.profile__edit-button');
+const profileButtonAdd = profile.querySelector('.profile__add-button');
+const profileOldName = profile.querySelector('.profile__name');
+const profileOldAbout = profile.querySelector('.profile__short-about');
 
-const popup = wholePage.querySelector('.popup');
-const popupForm = popup.querySelector('.popup__form');
-const popupTitle = popup.querySelector('.popup__title');
-const closeButton = popup.querySelector('.popup__close-button');
-const submitButton = popup.querySelector('.popup__submit');
+const editionPopup = wholePage.querySelector('.popup_type_edit');
+const additionPopup = wholePage.querySelector('.popup_type_add');
+const photoPopup = wholePage.querySelector('.popup_type_photo');
+const editionPopupForm = editionPopup.querySelector('.popup__form');
+const editionPopupTitle = editionPopup.querySelector('.popup__title');
+const editionPopupButton = editionPopup.querySelector('.popup__submit');
+const editionPopupNameInput = editionPopup.querySelector('.popup__input_field_name');
+const editionPopupAboutInput = editionPopup.querySelector('.popup__input_field_about');
+const additionPopupForm = additionPopup.querySelector('.popup__form');
+const additionPopupTitle = additionPopup.querySelector('.popup__title');
+const additionPopupButton = additionPopup.querySelector('.popup__submit');
+const additionPopupNameInput = additionPopup.querySelector('.popup__input_field_name');
+const additionPopupLinkInput = additionPopup.querySelector('.popup__input_field_about');
+const photoPopupPhoto = photoPopup.querySelector('.popup__photo');
+const photoPopupTitle = photoPopup.querySelector('.popup__phototitle');
 
 const elementsSection = wholePage.querySelector('.elements');
 
-const photoupElement = wholePage.querySelector('.photoup');
-const photoupTitle = photoupElement.querySelector('.photoup__title');
-const photoupPhoto = photoupElement.querySelector('.photoup__photo');
-const photoupClose = photoupElement.querySelector('.photoup__close-button');
+const template = document.querySelector('#element').content;
 
+function findPopup(evt) {
+  let modalWindow = {};
+  if (evt.target.classList.value === 'profile__edit-button') {
+    modalWindow = editionPopup;
+    editionPopupTitle.innerHTML = 'Редактировать профиль';
+    editionPopupNameInput.placeholder = 'Имя';
+    editionPopupAboutInput.placeholder = 'Описание';
+    editionPopupNameInput.value = profileOldName.textContent;
+    editionPopupAboutInput.value = profileOldAbout.textContent;
+  };
+  if (evt.target.classList.value === 'profile__add-button') {
+    modalWindow = additionPopup;
+    additionPopupTitle.innerHTML = 'Новое место';
+    additionPopupNameInput.placeholder = 'Название';
+    additionPopupLinkInput.placeholder = 'Ссылка на картинку';
+    additionPopupNameInput.value = '';
+    additionPopupLinkInput.value = '';
+  };
+  if (evt.target.className === 'element__photo') {
+    const photoName = evt.target.closest('.element').querySelector('.element__name').textContent;
+    const photoLink = evt.target.closest('.element').querySelector('.element__photo').src;
 
-let nameInput = popup.querySelector('.popup__input_field_name');
-let aboutInput = popup.querySelector('.popup__input_field_about');
-let oldName = profile.querySelector('.profile__name');
-let oldAbout = profile.querySelector('.profile__short-about');
+    photoPopupTitle.textContent = photoName;
+    photoPopupPhoto.src = photoLink;
+    photoPopupPhoto.alt = photoName;
 
-loadInitialCards(initialCards);
-
-function showPopup(evt) {
-  if (evt.target.className === 'profile__edit-button') {
-    popupTitle.innerHTML = 'Редактировать профиль';
-    nameInput.placeholder = 'Имя';
-    aboutInput.placeholder = 'Описание';
-    nameInput.value = oldName.textContent;
-    aboutInput.value = oldAbout.textContent;
-  }
-  if (evt.target.className === 'profile__add-button') {
-    popupTitle.innerHTML = 'Новое место';
-    nameInput.placeholder = 'Название';
-    aboutInput.placeholder = 'Ссылка на картинку';
-    nameInput.value = '';
-    aboutInput.value = '';
-    submitButton.classList.add('popup__from_add');
-  }
-  popup.classList.add('popup_opened');
+    modalWindow = photoPopup;
+  };
+  showPopup(modalWindow);
 };
 
-function hidePopup() {
-  popup.classList.remove(`popup_opened`);
+function showPopup(modalWindow) {
+  modalWindow.querySelector('.popup__close-button').addEventListener('click', closePopup);
+  modalWindow.classList.add('popup_opened');
 };
 
-function hidePhotoup() {
-  photoupElement.classList.remove(`photoup_opened`);
+function closePopup(evt) {
+  evt.target.closest('.popup').classList.remove('popup_opened');
 };
 
-function formSubmitHandler(evt) {
+function handleForm(evt) {
   evt.preventDefault();
+  let classToCheck = evt.target.closest('.popup');
 
-  if (submitButton.classList.contains('popup__from_add')) {
-    let newName = nameInput.value;
-    let newLink = aboutInput.value;
+  if (classToCheck.classList.contains('popup_type_edit')) {
+
+    let newName = editionPopupNameInput.value;
+    let newAbout = editionPopupAboutInput.value;
+
+    profileOldName.textContent = newName;
+    profileOldAbout.textContent = newAbout;
+  };
+
+  if (classToCheck.classList.contains('popup_type_add')) {
+
+    let newName = additionPopupNameInput.value;
+    let newLink = additionPopupLinkInput.value;
 
     loadCards(newName, newLink);
-    submitButton.classList.remove('popup__from_add');
-  } else {
-    let newName = nameInput.value;
-    let newAbout = aboutInput.value;
+  };
 
-    oldName.textContent = newName;
-    oldAbout.textContent = newAbout;
-  }
-  hidePopup();
+  closePopup(evt);
 };
 
 function loadCards(newName, newLink) {
-  const template = document.querySelector('#element').content;
   const elementElement = template.querySelector('.element');
-  const elementsElement = wholePage.querySelector('.elements');
 
   const newElement = elementElement.cloneNode(true);
   newElement.querySelector('.element__name').textContent = newName;
   newElement.querySelector('.element__photo').src = newLink;
   newElement.querySelector('.element__photo').alt = newName;
+  /*add function!!!*/
+  newElement.querySelector('.element__remove-button').addEventListener('click', handleRemoveButton);
+  newElement.querySelector('.element__photo').addEventListener('click', findPopup);
+  newElement.querySelector('.element__like-button').addEventListener('click', handleHeartButton);
 
-  elementsElement.prepend(newElement);
+  renderElement(newElement);
+};
+
+function renderElement(item) {
+  elementsSection.prepend(item);
 };
 
 function loadInitialCards(array) {
@@ -120,43 +145,20 @@ function loadInitialCards(array) {
   }
 };
 
-function elementHadler(evt) {
-  const bullEye = evt.target;
-  const parentElement = bullEye.closest('.element');
-  if (bullEye.classList.contains('element__like-button')) {
-    if (bullEye.classList.contains('element__like-button_disabled')) {
-      bullEye.classList.remove('element__like-button_disabled');
-      bullEye.classList.add('element__like-button_enabled');
-    } else {
-      bullEye.classList.remove('element__like-button_enabled');
-      bullEye.classList.add('element__like-button_disabled');
-    }
-  };
-
-  if (bullEye.classList.contains('element__remove-button')) {
-    parentElement.remove();
-  }
-
-  if (bullEye.classList.contains('element__photo')) {
-    const photoName = parentElement.querySelector('.element__name').textContent;
-    const photoLink = parentElement.querySelector('.element__photo').src;
-
-    photoupTitle.textContent = photoName;
-    photoupPhoto.src = photoLink;
-    photoupPhoto.alt = photoName;
-
-    photoupElement.classList.add('photoup_opened');
-  };
+function handleHeartButton(evt) {
+  evt.target.classList.toggle('element__like-button_enabled');
 };
 
-editButton.addEventListener('click', showPopup);
+function handleRemoveButton(evt) {
+  evt.target.closest('.element').remove();
+};
 
-closeButton.addEventListener('click', hidePopup);
+loadInitialCards(initialCards);
 
-popupForm.addEventListener('submit', formSubmitHandler);
+profileButtonEdit.addEventListener('click', findPopup);
 
-addButton.addEventListener('click', showPopup);
+profileButtonAdd.addEventListener('click', findPopup);
 
-elementsSection.addEventListener('click', elementHadler);
+editionPopupForm.addEventListener('submit', handleForm);
 
-photoupClose.addEventListener('click', hidePhotoup);
+additionPopupForm.addEventListener('submit', handleForm);
