@@ -56,13 +56,8 @@ const elementsSection = wholePage.querySelector('.elements');
 
 const template = document.querySelector('#element').content;
 
-/*прошу прощения, сударь, что заставил Вас быть свидетелем проявленными мной костностью и
-зашоренностью мышления.
-надеюсь, сейчас удалось исправить допущенные промахи и оплошности, приблизившись к более-менее
-удобоваримому варианту.
-сомнения меня одолели в части необходимости отдельных функций для обработки кнопок - что предочесть
-отдельная функция или стрелочное представление, выбор пал на отдельные функции.
-не судите строго.*/
+/*не забыл про открытие фото в попап - исправил, вроде:
+"При открытии фото в попапе с кратинкой изображение обрезано. Пропорции изображения должны быть сохранены."*/
 
 function handleEditButton() {
   editionPopupNameInput.value = profileOldName.textContent;
@@ -74,10 +69,10 @@ function handleAddButton() {
   showPopup(additionPopup);
 }
 
-function handlePhotoEnlargement(evt) {
-  photoPopupTitle.textContent = evt.target.closest('.element').querySelector('.element__name').textContent;
-  photoPopupPhoto.src = evt.target.closest('.element').querySelector('.element__photo').src;
-  photoPopupPhoto.alt = evt.target.closest('.element').querySelector('.element__name').textContent;
+function handlePhotoEnlargement(name, link) {
+  photoPopupTitle.textContent = name;
+  photoPopupPhoto.src = link;
+  photoPopupPhoto.alt = name;
   showPopup(photoPopup);
 }
 
@@ -85,8 +80,8 @@ function showPopup(modalWindow) {
   modalWindow.classList.add('popup_opened');
 };
 
-function closePopup(evt) {
-  evt.target.closest('.popup').classList.remove('popup_opened');
+function closePopup(modalWindow) {
+  modalWindow.classList.remove('popup_opened');
 };
 
 function handleEditForm(evt) {
@@ -94,42 +89,42 @@ function handleEditForm(evt) {
   profileOldName.textContent = editionPopupNameInput.value;
   profileOldAbout.textContent = editionPopupAboutInput.value;
 
-  closePopup(evt);
+  closePopup(editionPopup);
 }
 
 function handleAddForm(evt) {
   evt.preventDefault();
   elementsSection.prepend(createCard(additionPopupNameInput.value, additionPopupLinkInput.value));
 
-  closePopup(evt);
+  closePopup(additionPopup);
 }
 
-function createCard(Name, Link) {
-  const elementElement = template.querySelector('.element');
+function createCard(name, link) {
 
-  const newElement = elementElement.cloneNode(true);
-  newElement.querySelector('.element__name').textContent = Name;
-  newElement.querySelector('.element__photo').src = Link;
-  newElement.querySelector('.element__photo').alt = Name;
+  const newElement = template.querySelector('.element').cloneNode(true);
+  const newElementPhoto = newElement.querySelector('.element__photo');
+  newElement.querySelector('.element__name').textContent = name;
+  newElementPhoto.src = link;
+  newElementPhoto.alt = name;
 
   newElement.querySelector('.element__remove-button').addEventListener('click', handleRemoveButton);
-  newElement.querySelector('.element__photo').addEventListener('click', handlePhotoEnlargement);
+  newElementPhoto.addEventListener('click', () => {handlePhotoEnlargement(name, link)});
   newElement.querySelector('.element__like-button').addEventListener('click', handleHeartButton);
 
   return newElement;
 };
 
-function renderElement(Name, Link) {
-  elementsSection.append(createCard(Name, Link));
+function renderElement(name, link) {
+  elementsSection.append(createCard(name, link));
 };
 
 function loadInitialCards(array) {
-  for(let i = 0; i < array.length; i++) {
-    Name = array[i].name;
-    Link = array[i].link;
+  array.forEach((element) => {
+    name = element.name;
+    link = element.link;
 
-    renderElement(Name, Link);
-  }
+    renderElement(name, link);
+  })
 };
 
 function handleHeartButton(evt) {
@@ -150,8 +145,8 @@ editionPopupForm.addEventListener('submit', handleEditForm);
 
 additionPopupForm.addEventListener('submit', handleAddForm);
 
-photoPopupClose.addEventListener('click', closePopup);
+photoPopupClose.addEventListener('click', ((evt) => {closePopup(evt.target.closest('.popup'))}));
 
-additionPopupClose.addEventListener('click', closePopup);
+additionPopupClose.addEventListener('click', ((evt) => {closePopup(evt.target.closest('.popup'))}));
 
-editionPopupClose.addEventListener('click', closePopup);
+editionPopupClose.addEventListener('click', ((evt) => {closePopup(evt.target.closest('.popup'))}));
