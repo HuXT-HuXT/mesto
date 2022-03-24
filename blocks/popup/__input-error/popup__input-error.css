@@ -1,8 +1,13 @@
 .popup__input-error {
-  float: left;
-  margin: 5px 0 0;
+  display: inline-block;
+  box-sizing: border-box;
+  min-height: 30px;
+  height: 12px;
+  margin: 0;
   padding: 0;
-  font-size: .75rem;
-  line-height: .9075rem;
+  font-size: 12px;
+  /*при 15пкс высоты строки весь блок уменьшался при выводе ошибки на 2 строки на ~3пкс.
+  при значении 17пкс увеличивается только на 1 при выводе 1-строчной ошибки(*/
+  line-height: 17px;
   color: #f00;
 }

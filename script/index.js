@@ -77,11 +77,13 @@ function handlePhotoEnlargement(name, link) {
 
 function showPopup(modalWindow) {
   modalWindow.classList.add('popup_opened');
-  putFocusOnInput(modalWindow);
 };
 
 function closePopup(modalWindow) {
   modalWindow.classList.remove('popup_opened');
+  if (modalWindow.querySelector('.popup__form')) {
+  modalWindow.querySelector('.popup__form').reset();
+  };
 };
 
 function handleEditForm(evt) {
@@ -135,11 +137,7 @@ function handleRemoveButton(evt) {
   evt.target.closest('.element').remove();
 };
 
-function putFocusOnInput(modalWindow) {
-  if (modalWindow.querySelector('.popup__input')) {
-    modalWindow.querySelector('.popup__input').focus();
-  }
-}
+//putFocusOnInput был запасным планом для обработки Esc, так как нажатие не обрабатывается пока нет фокуса.
 
 loadInitialCards(initialCards);
 
@@ -157,20 +155,20 @@ additionPopupClose.addEventListener('click', ((evt) => {closePopup(evt.target.cl
 
 editionPopupClose.addEventListener('click', ((evt) => {closePopup(evt.target.closest('.popup'))}));
 
-editionPopupForm.addEventListener('keydown', (evt) => {  
+editionPopupForm.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {
     closePopup(evt.target.closest('.popup'));
   }
 });
 
-additionPopupForm.addEventListener('keydown', (evt) => {  
+additionPopupForm.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {
     closePopup(evt.target.closest('.popup'));
   }
 });
 
 popupElements.forEach((popupElement) => {
-  popupElement.addEventListener('click', (evt) => {    
+  popupElement.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('popup')) {closePopup(evt.target)}
   });
 });

@@ -1,5 +1,3 @@
-//гит почему-то затёр изменения в куче файлов. в визуал студии работало, выгрузил в гит и вуаля много изменений откатилось
-
 const validationCriteria = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -10,7 +8,6 @@ const validationCriteria = {
 };
 
 const setEventListeners = (formElement, obj) => {
-  console.log(formElement);
   const inputList = Array.from(formElement.querySelectorAll(`${obj.inputSelector}`));
   const buttonElement = formElement.querySelector(`${obj.submitButtonSelector}`);
 
@@ -27,8 +24,10 @@ const setEventListeners = (formElement, obj) => {
 const toggleButtonState = (inputList, buttonElement, obj) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(`${obj.inactiveButtonClass}`);
+    buttonElement.setAttribute("disabled", "disabled");
   } else {
     buttonElement.classList.remove(`${obj.inactiveButtonClass}`);
+    buttonElement.removeAttribute("disabled", "disabled");
   };
 };
 
