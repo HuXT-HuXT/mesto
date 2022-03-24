@@ -1,9 +1,0 @@
-.photoup__photo {
-  max-width: 75vw;
-  max-height: 75vh;
-  width: max-content;
-  height: max-content;
-  object-fit: cover;
-  object-position: center;
-  overflow: hidden;
-}

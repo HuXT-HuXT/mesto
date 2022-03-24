@@ -42,11 +42,3 @@
 @import url(../blocks/popup/__photo/popup__photo.css);
 @import url(../blocks/popup/__photocontainer/popup__photocontainer.css);
 @import url(../blocks/popup/__phototitle/popup__phototitle.css);
-
-@import url(../blocks/photoup/photoup.css);
-@import url(../blocks/photoup/__close-button/photoup__close-button.css);
-@import url(../blocks/photoup/__container/photoup__container.css);
-@import url(../blocks/element/__photo-part/element__photo-part.css);
-@import url(../blocks/photoup/__photo/photoup__photo.css);
-@import url(../blocks/photoup/__title/photoup__title.css);
-@import url(../blocks/photoup/_opened/photoup_opened.css);
