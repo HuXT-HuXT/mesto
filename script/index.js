@@ -33,6 +33,8 @@ const profileButtonAdd = profile.querySelector('.profile__add-button');
 const profileOldName = profile.querySelector('.profile__name');
 const profileOldAbout = profile.querySelector('.profile__short-about');
 
+const popupElements = wholePage.querySelectorAll('.popup');
+
 const editionPopup = wholePage.querySelector('.popup_type_edit');
 const additionPopup = wholePage.querySelector('.popup_type_add');
 const photoPopup = wholePage.querySelector('.popup_type_photo');
@@ -56,9 +58,6 @@ const elementsSection = wholePage.querySelector('.elements');
 
 const template = document.querySelector('#element').content;
 
-/*не забыл про открытие фото в попап - исправил, вроде:
-"При открытии фото в попапе с кратинкой изображение обрезано. Пропорции изображения должны быть сохранены."*/
-
 function handleEditButton() {
   editionPopupNameInput.value = profileOldName.textContent;
   editionPopupAboutInput.value = profileOldAbout.textContent;
@@ -78,6 +77,7 @@ function handlePhotoEnlargement(name, link) {
 
 function showPopup(modalWindow) {
   modalWindow.classList.add('popup_opened');
+  putFocusOnInput(modalWindow);
 };
 
 function closePopup(modalWindow) {
@@ -135,6 +135,12 @@ function handleRemoveButton(evt) {
   evt.target.closest('.element').remove();
 };
 
+function putFocusOnInput(modalWindow) {
+  if (modalWindow.querySelector('.popup__input')) {
+    modalWindow.querySelector('.popup__input').focus();
+  }
+}
+
 loadInitialCards(initialCards);
 
 profileButtonEdit.addEventListener('click', handleEditButton);
@@ -150,3 +156,31 @@ photoPopupClose.addEventListener('click', ((evt) => {closePopup(evt.target.close
 additionPopupClose.addEventListener('click', ((evt) => {closePopup(evt.target.closest('.popup'))}));
 
 editionPopupClose.addEventListener('click', ((evt) => {closePopup(evt.target.closest('.popup'))}));
+
+editionPopupForm.addEventListener('keydown', (evt) => {  
+  if (evt.key === 'Escape') {
+    closePopup(evt.target.closest('.popup'));
+  }
+});
+
+additionPopupForm.addEventListener('keydown', (evt) => {  
+  if (evt.key === 'Escape') {
+    closePopup(evt.target.closest('.popup'));
+  }
+});
+
+popupElements.forEach((popupElement) => {
+  popupElement.addEventListener('click', (evt) => {    
+    if (evt.target.classList.contains('popup')) {closePopup(evt.target)}
+  });
+});
+
+document.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Escape') {
+    popupElements.forEach((popupElement) => {
+    if (popupElement.classList.contains('popup_opened')) {
+      closePopup(popupElement);
+      };
+    });
+  }
+});
