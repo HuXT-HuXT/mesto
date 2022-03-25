@@ -27,7 +27,7 @@ const toggleButtonState = (inputList, buttonElement, obj) => {
     buttonElement.setAttribute("disabled", "disabled");
   } else {
     buttonElement.classList.remove(`${obj.inactiveButtonClass}`);
-    buttonElement.removeAttribute("disabled", "disabled");
+    buttonElement.removeAttribute("disabled", "");
   };
 };
 

@@ -77,13 +77,12 @@ function handlePhotoEnlargement(name, link) {
 
 function showPopup(modalWindow) {
   modalWindow.classList.add('popup_opened');
+  document.addEventListener('keydown', handleEscButton);
 };
 
 function closePopup(modalWindow) {
   modalWindow.classList.remove('popup_opened');
-  if (modalWindow.querySelector('.popup__form')) {
-  modalWindow.querySelector('.popup__form').reset();
-  };
+  document.removeEventListener('keydown', handleEscButton);
 };
 
 function handleEditForm(evt) {
@@ -97,7 +96,10 @@ function handleEditForm(evt) {
 function handleAddForm(evt) {
   evt.preventDefault();
   elementsSection.prepend(createCard(additionPopupNameInput.value, additionPopupLinkInput.value));
+  additionPopupButton.setAttribute('disabled', 'disabled');
+  additionPopupButton.classList.add('popup__submit_disabled');
 
+  additionPopupForm.reset();
   closePopup(additionPopup);
 }
 
@@ -122,8 +124,8 @@ function renderElement(name, link) {
 
 function loadInitialCards(array) {
   array.forEach((element) => {
-    name = element.name;
-    link = element.link;
+    let name = element.name;
+    let link = element.link;
 
     renderElement(name, link);
   })
@@ -137,7 +139,13 @@ function handleRemoveButton(evt) {
   evt.target.closest('.element').remove();
 };
 
-//putFocusOnInput был запасным планом для обработки Esc, так как нажатие не обрабатывается пока нет фокуса.
+function handleEscButton(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
+}
+
 
 loadInitialCards(initialCards);
 
@@ -155,30 +163,8 @@ additionPopupClose.addEventListener('click', ((evt) => {closePopup(evt.target.cl
 
 editionPopupClose.addEventListener('click', ((evt) => {closePopup(evt.target.closest('.popup'))}));
 
-editionPopupForm.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
-    closePopup(evt.target.closest('.popup'));
-  }
-});
-
-additionPopupForm.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
-    closePopup(evt.target.closest('.popup'));
-  }
-});
-
 popupElements.forEach((popupElement) => {
   popupElement.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('popup')) {closePopup(evt.target)}
   });
-});
-
-document.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
-    popupElements.forEach((popupElement) => {
-    if (popupElement.classList.contains('popup_opened')) {
-      closePopup(popupElement);
-      };
-    });
-  }
 });
