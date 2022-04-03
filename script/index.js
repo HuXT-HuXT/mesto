@@ -1,3 +1,6 @@
+import { Card } from './card.js';
+import { validationCriteria, FormValidator } from './formvalidator.js';
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -54,26 +57,19 @@ const photoPopupPhoto = photoPopup.querySelector('.popup__photo');
 const photoPopupTitle = photoPopup.querySelector('.popup__phototitle');
 const photoPopupClose = photoPopup.querySelector('.popup__close-button');
 
-const elementsSection = wholePage.querySelector('.elements');
-
 const template = document.querySelector('#element').content;
+
+const elementsSection = wholePage.querySelector('.elements');
 
 function handleEditButton() {
   editionPopupNameInput.value = profileOldName.textContent;
   editionPopupAboutInput.value = profileOldAbout.textContent;
   showPopup(editionPopup);
-}
+};
 
 function handleAddButton() {
   showPopup(additionPopup);
-}
-
-function handlePhotoEnlargement(name, link) {
-  photoPopupTitle.textContent = name;
-  photoPopupPhoto.src = link;
-  photoPopupPhoto.alt = name;
-  showPopup(photoPopup);
-}
+};
 
 function showPopup(modalWindow) {
   modalWindow.classList.add('popup_opened');
@@ -91,7 +87,7 @@ function handleEditForm(evt) {
   profileOldAbout.textContent = editionPopupAboutInput.value;
 
   closePopup(editionPopup);
-}
+};
 
 function handleAddForm(evt) {
   evt.preventDefault();
@@ -101,21 +97,13 @@ function handleAddForm(evt) {
 
   additionPopupForm.reset();
   closePopup(additionPopup);
-}
+};
 
 function createCard(name, link) {
+  const card = new Card(name, link);
+  const cardElement = card.generateCard();
 
-  const newElement = template.querySelector('.element').cloneNode(true);
-  const newElementPhoto = newElement.querySelector('.element__photo');
-  newElement.querySelector('.element__name').textContent = name;
-  newElementPhoto.src = link;
-  newElementPhoto.alt = name;
-
-  newElement.querySelector('.element__remove-button').addEventListener('click', handleRemoveButton);
-  newElementPhoto.addEventListener('click', () => {handlePhotoEnlargement(name, link)});
-  newElement.querySelector('.element__like-button').addEventListener('click', handleHeartButton);
-
-  return newElement;
+  return cardElement;
 };
 
 function renderElement(name, link) {
@@ -131,21 +119,21 @@ function loadInitialCards(array) {
   })
 };
 
-function handleHeartButton(evt) {
-  evt.target.classList.toggle('element__like-button_enabled');
-};
-
-function handleRemoveButton(evt) {
-  evt.target.closest('.element').remove();
-};
-
 function handleEscButton(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
-}
+};
 
+function validateForm(obj, form) {
+  const evaluation = new FormValidator(obj, form);
+  const evaluationForm = evaluation.enableValidation();
+};
+
+validateForm(validationCriteria, editionPopupForm);
+
+validateForm(validationCriteria, additionPopupForm);
 
 loadInitialCards(initialCards);
 
@@ -157,14 +145,12 @@ editionPopupForm.addEventListener('submit', handleEditForm);
 
 additionPopupForm.addEventListener('submit', handleAddForm);
 
-photoPopupClose.addEventListener('click', ((evt) => {closePopup(evt.target.closest('.popup'))}));
-
-additionPopupClose.addEventListener('click', ((evt) => {closePopup(evt.target.closest('.popup'))}));
-
-editionPopupClose.addEventListener('click', ((evt) => {closePopup(evt.target.closest('.popup'))}));
-
 popupElements.forEach((popupElement) => {
   popupElement.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('popup')) {closePopup(evt.target)}
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
+      closePopup(popupElement);
+    }
   });
 });
+
+export { showPopup, photoPopup, photoPopupPhoto, photoPopupTitle };
