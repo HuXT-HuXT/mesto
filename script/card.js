@@ -1,11 +1,11 @@
-//const template = document.querySelector('#element').content;
-
 import { showPopup, photoPopup, photoPopupPhoto, photoPopupTitle } from "./index.js";
+
+//постараюсь организовать корректно импорты из доп. файлов. спасибо
 
 class Card {
   constructor(name, link) {
     this._name = name;
-    this._link = link;
+    this._link = link;    
   };
 
   _getTemplate() {
@@ -20,6 +20,7 @@ class Card {
 
   _handleRemoveButton() {
     this._element.remove();
+    this._element = null;
   };
 
   _handleHeartButton(evt) {
@@ -34,9 +35,6 @@ class Card {
   };
 
   _setEventListeners() {
-    //const removalButton = this._element.querySelector('.element__remove-button');
-    //const heartButton = this._element.querySelector('.element__like-button');
-    //const photoEnlargement = this._element.querySelector('.element__photo');
 
     this._element.querySelector('.element__remove-button').addEventListener('click', () => {
       this._handleRemoveButton();
@@ -46,20 +44,21 @@ class Card {
       this._handleHeartButton(evt);
     })
 
-    this._element.querySelector('.element__photo').addEventListener('click', () => {
+    this._newElementPhoto.addEventListener('click', () => {
+      console.log()
       this._handlePhotoEnlargement(this._name, this._link);
     })
   };
-  //add methods: handleRemoveButton, handlePhotoEnlargement, handleHeartButton
+  
 
   generateCard() {
     this._element = this._getTemplate();
-    const newElementPhoto = this._element.querySelector('.element__photo');
+    this._newElementPhoto = this._element.querySelector('.element__photo');
     this._setEventListeners();
 
     this._element.querySelector('.element__name').textContent = this._name;
-    newElementPhoto.src = this._link;
-    newElementPhoto.alt = this._name;
+    this._newElementPhoto.src = this._link;
+    this._newElementPhoto.alt = this._name;
 
     return this._element;
   }

@@ -1,5 +1,5 @@
-import { Card } from './card.js';
-import { validationCriteria, FormValidator } from './formvalidator.js';
+import { Card } from './Card.js';
+import { validationCriteria, FormValidator } from './FormValidator.js';
 
 const initialCards = [
   {
@@ -42,22 +42,22 @@ const editionPopup = wholePage.querySelector('.popup_type_edit');
 const additionPopup = wholePage.querySelector('.popup_type_add');
 const photoPopup = wholePage.querySelector('.popup_type_photo');
 const editionPopupForm = editionPopup.querySelector('.popup__form');
-const editionPopupTitle = editionPopup.querySelector('.popup__title');
+//const editionPopupTitle = editionPopup.querySelector('.popup__title');
 const editionPopupButton = editionPopup.querySelector('.popup__submit');
 const editionPopupNameInput = editionPopup.querySelector('.popup__input_field_name');
 const editionPopupAboutInput = editionPopup.querySelector('.popup__input_field_about');
-const editionPopupClose = editionPopup.querySelector('.popup__close-button');
+//const editionPopupClose = editionPopup.querySelector('.popup__close-button');
 const additionPopupForm = additionPopup.querySelector('.popup__form');
-const additionPopupTitle = additionPopup.querySelector('.popup__title');
+//const additionPopupTitle = additionPopup.querySelector('.popup__title');
 const additionPopupButton = additionPopup.querySelector('.popup__submit');
 const additionPopupNameInput = additionPopup.querySelector('.popup__input_field_name');
 const additionPopupLinkInput = additionPopup.querySelector('.popup__input_field_about');
-const additionPopupClose = additionPopup.querySelector('.popup__close-button');
+//const additionPopupClose = additionPopup.querySelector('.popup__close-button');
 const photoPopupPhoto = photoPopup.querySelector('.popup__photo');
 const photoPopupTitle = photoPopup.querySelector('.popup__phototitle');
-const photoPopupClose = photoPopup.querySelector('.popup__close-button');
+//const photoPopupClose = photoPopup.querySelector('.popup__close-button');
 
-const template = document.querySelector('#element').content;
+//const template = document.querySelector('#element').content;
 
 const elementsSection = wholePage.querySelector('.elements');
 
@@ -77,7 +77,7 @@ function showPopup(modalWindow) {
 };
 
 function closePopup(modalWindow) {
-  modalWindow.classList.remove('popup_opened');
+  modalWindow.classList.remove('popup_opened');  
   document.removeEventListener('keydown', handleEscButton);
 };
 
@@ -92,10 +92,8 @@ function handleEditForm(evt) {
 function handleAddForm(evt) {
   evt.preventDefault();
   elementsSection.prepend(createCard(additionPopupNameInput.value, additionPopupLinkInput.value));
-  additionPopupButton.setAttribute('disabled', 'disabled');
-  additionPopupButton.classList.add('popup__submit_disabled');
-
   additionPopupForm.reset();
+
   closePopup(additionPopup);
 };
 
@@ -112,8 +110,8 @@ function renderElement(name, link) {
 
 function loadInitialCards(array) {
   array.forEach((element) => {
-    let name = element.name;
-    let link = element.link;
+    const name = element.name;
+    const link = element.link;
 
     renderElement(name, link);
   })
@@ -153,4 +151,4 @@ popupElements.forEach((popupElement) => {
   });
 });
 
-export { showPopup, photoPopup, photoPopupPhoto, photoPopupTitle };
+export { showPopup, photoPopup, photoPopupPhoto, photoPopupTitle, additionPopupButton };

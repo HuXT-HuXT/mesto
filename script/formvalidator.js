@@ -49,14 +49,19 @@ class FormValidator {
     inputField.classList.add(`${this._inputErrorClass}`);
     errorElement.classList.add(`${this._errorClass}`);
     errorElement.textContent = errorMessage;
-  }
+  };
 
   _hideInputError(inputField) {
     const errorElement = this._formElement.querySelector(`.${inputField.id}-error`);
     inputField.classList.remove(`${this._inputErrorClass}`);
     errorElement.classList.remove(`${this._errorClass}`);
     errorElement.textContent = '';
-  }
+  };
+
+  _disableSubmitButton() {
+    this._buttonElement.setAttribute('disabled', '');
+    this._buttonElement.classList.add('popup__submit_disabled');
+  };
 
   _setEventListeners() {
 
@@ -73,6 +78,7 @@ class FormValidator {
   enableValidation() {
     this._formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
+      this._disableSubmitButton()
     })
     this._setEventListeners();
   };
