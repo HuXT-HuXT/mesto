@@ -1,12 +1,3 @@
-const validationCriteria = {
-
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit',
-  inactiveButtonClass: 'popup__submit_disabled',
-  inputErrorClass: 'popup__input_error',
-  errorClass: 'popup__input-error_active'
-};
-
 class FormValidator {
   constructor(obj, form) {
 
@@ -60,7 +51,7 @@ class FormValidator {
 
   _disableSubmitButton() {
     this._buttonElement.setAttribute('disabled', '');
-    this._buttonElement.classList.add('popup__submit_disabled');
+    this._buttonElement.classList.add(`${this._inactiveButtonClass}`);
   };
 
   _setEventListeners() {
@@ -85,4 +76,4 @@ class FormValidator {
 
 };
 
-export { validationCriteria, FormValidator };
+export { FormValidator };

@@ -1,11 +1,11 @@
-import { showPopup, photoPopup, photoPopupPhoto, photoPopupTitle } from "./index.js";
+import { photoPopup, photoPopupPhoto, photoPopupTitle } from "./constants.js";
+import { showPopup } from "./utils.js";
 
-//постараюсь организовать корректно импорты из доп. файлов. спасибо
 
 class Card {
   constructor(name, link) {
     this._name = name;
-    this._link = link;    
+    this._link = link;
   };
 
   _getTemplate() {
@@ -49,7 +49,7 @@ class Card {
       this._handlePhotoEnlargement(this._name, this._link);
     })
   };
-  
+
 
   generateCard() {
     this._element = this._getTemplate();
