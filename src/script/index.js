@@ -1,3 +1,5 @@
+import './../pages/index.css';
+
 import { initialCards, validationCriteria, profileButtonEdit, profileButtonAdd,
   editionPopupForm, additionPopupForm, popupElements, popupWithPictureSelector,
   popupWithEditFormSelector, popupWithAddFormSelector, profileSelector, userDataSelector,
