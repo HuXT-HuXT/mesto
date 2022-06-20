@@ -5,21 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Место</title>
-    <link rel="stylesheet" href="./pages/index.css">
 </head>
 <!---->
 <body class="body">
   <div class="page">
 
     <header class="header">
-      <img src="./images/logo.svg" alt="Лого проекта" class="header__logo">
+      <img src="<%=require('./images/logo.svg')%>" alt="Лого проекта" class="header__logo">
     </header>
 
     <main>
 
       <section class="profile">
         <div class="profile__pers-info">
-          <img src="./images/jan_jack_.jpg" alt="Фото пользователя" class="profile__photo">
+          <img src="<%=require('./images/jan_jack_.jpg')%>" alt="Фото пользователя" class="profile__photo">
           <div class="profile__description">
             <div class="profile__name-form">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -46,9 +45,9 @@
         <button aria-label="Закрыть окошко" type="button" class="popup__close-button"></button>
         <form action="#" class="popup__form" name="form-user-data" novalidate>
           <h2 class="popup__title">Редактировать профиль</h2>
-          <input type="text" class="popup__input popup__input_field_name" id="name-input" placeholder="Имя" required name="form-name" minlength="2" maxlength="40">
+          <input type="text" class="popup__input popup__input_field_name" id="name-input" placeholder="Имя" required name="userName" minlength="2" maxlength="40">
           <span class="popup__input-error name-input-error"></span>
-          <input type="text" class="popup__input popup__input_field_about" id="about-input" placeholder="Описание" required name="form-about" minlength="2" maxlength="200">
+          <input type="text" class="popup__input popup__input_field_about" id="about-input" placeholder="Описание" required name="userAbout" minlength="2" maxlength="200">
           <span class="popup__input-error about-input-error"></span>
           <input type="submit" class="popup__submit" value="Сохранить">
         </form>
@@ -60,9 +59,9 @@
         <button aria-label="Закрыть окошко" type="button" class="popup__close-button"></button>
         <form action="#" class="popup__form" name="form-user-data" novalidate>
           <h2 class="popup__title">Новое место</h2>
-          <input type="text" class="popup__input popup__input_field_name" id="label-input" placeholder="Название" required name="form-name" minlength="2" maxlength="30">
+          <input type="text" class="popup__input popup__input_field_name" id="label-input" placeholder="Название" required name="label" minlength="2" maxlength="30">
           <span class="popup__input-error label-input-error"></span>
-          <input type="url" class="popup__input popup__input_field_about" id="link-input" placeholder="Ссылка на картинку" required name="form-about">
+          <input type="url" class="popup__input popup__input_field_about" id="link-input" placeholder="Ссылка на картинку" required name="link">
           <span class="popup__input-error link-input-error"></span>
           <input type="submit" class="popup__submit" value="Сохранить">
         </form>
@@ -90,6 +89,5 @@
       </div>
     </div>
   </template>
-  <script type="module" src="./script/index.js"></script>  
 </body>
 </html>

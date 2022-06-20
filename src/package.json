@@ -1,0 +1,19 @@
+{
+  "name": "mesto",
+  "version": "0.0.1",
+  "description": "description: exam work, 7th sprint;",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HuXT-HuXT/mesto.git"
+  },
+  "author": "K S",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HuXT-HuXT/mesto/issues"
+  },
+  "homepage": "https://github.com/HuXT-HuXT/mesto#readme"
+}

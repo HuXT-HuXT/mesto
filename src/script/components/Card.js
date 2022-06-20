@@ -1,11 +1,12 @@
-import { photoPopup, photoPopupPhoto, photoPopupTitle } from "./constants.js";
-import { showPopup } from "./utils.js";
+/*import { photoPopup, photoPopupPhoto, photoPopupTitle } from "./constants.js";
+import { showPopup } from "./utils.js";*/
 
 
-class Card {
-  constructor(name, link) {
+export default class Card {
+  constructor({ handleCardClick }, name, link) {
     this._name = name;
     this._link = link;
+    this.handleCardClick = handleCardClick;
   };
 
   _getTemplate() {
@@ -45,11 +46,9 @@ class Card {
     })
 
     this._newElementPhoto.addEventListener('click', () => {
-      console.log()
-      this._handlePhotoEnlargement(this._name, this._link);
+      this.handleCardClick(this._name, this._link);
     })
   };
-
 
   generateCard() {
     this._element = this._getTemplate();
@@ -64,4 +63,3 @@ class Card {
   }
 }
 
-export { Card };
