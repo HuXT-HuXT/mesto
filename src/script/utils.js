@@ -1,7 +1,7 @@
 import { FormValidator } from './components/FormValidator.js';
 
-function validateForm(obj, form) {
-  const evaluation = new FormValidator(obj, form);
+function validateForm(validationConfig, form) {
+  const evaluation = new FormValidator(validationConfig, form);
   const evaluationForm = evaluation.enableValidation();
 };
 

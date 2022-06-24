@@ -9,9 +9,11 @@ export default class PopupWithForm extends Popup {
   }
 
   open(userData) {
-    this._formFields.forEach((item) => {
-      item.value = userData[item.name];
-    })
+    if (userData) {
+      this._formFields.forEach((item) => {
+        item.value = userData[item.name];
+      })
+    }
     super.open();
   }
 

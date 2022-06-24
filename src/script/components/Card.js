@@ -1,7 +1,6 @@
 /*import { photoPopup, photoPopupPhoto, photoPopupTitle } from "./constants.js";
 import { showPopup } from "./utils.js";*/
 
-
 export default class Card {
   constructor({ handleCardClick }, name, link) {
     this._name = name;
