@@ -10,6 +10,7 @@
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 @import url(../blocks/profile/__pers-info/profile__pers-info.css);
+@import url(../blocks/profile/__photo-section/profile__photo-section.css);
 @import url(../blocks/profile/__photo/profile__photo.css);
 @import url(../blocks/profile/__description/profile__description.css);
 @import url(../blocks/profile/__name-form/profile__name-form.css);
@@ -21,10 +22,13 @@
 
 @import url(../blocks/element/element.css);
 @import url(../blocks/element/__remove-button/element__remove-button.css);
+@import url(../blocks/element/__remove-button/_shown/element__remove-button_shown.css);
 @import url(../blocks/element/__photo-part/element__photo-part.css);
 @import url(../blocks/element/__photo/element__photo.css);
 @import url(../blocks/element/__description/element__description.css);
+@import url(../blocks/element/__likes-section/element__likes-section.css);
 @import url(../blocks/element/__like-button/element__like-button.css);
+@import url(../blocks/element/__likes-amount/element__likes-amount.css);
 @import url(../blocks/element/__like-button/_enabled/element__like-button_enabled.css);
 @import url(../blocks/element/__name/element__name.css);
 

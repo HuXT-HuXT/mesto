@@ -4,6 +4,8 @@
   height: 19px;
   top: 20px;
   right: 20px;
+  visibility: hidden;
+  opacity: 0;
   background-color: transparent;
   border: none;
   background-image: url(../../../images/trash.svg);
