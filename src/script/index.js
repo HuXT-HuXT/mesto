@@ -46,11 +46,11 @@ const formForAdd = new PopupWithForm({
     api.setNewCard(item)
       .then(data => {
         cardList.prependItem(createCard(data));
+        formForAdd.close();
       })
       .catch(err => console.log('Неудача при добавлении фоточки', err))
       .finally(() => {
         formForAdd.renderLoading(false);
-        formForAdd.close();
       })
   }
 },
@@ -68,11 +68,11 @@ const formForAvatar = new PopupWithForm({
     api.setUserAvatar(item)
       .then((data) => {
         userInfo.setUserAvatar(data);
+        formForAvatar.close();
       })
       .catch(err => console.log('Неудача при обновление аватара', err))
       .finally(() => {
         formForAvatar.renderLoading(false);
-        formForAvatar.close();
       })
   }
 }, popupWithAvatarSelector)
@@ -145,11 +145,11 @@ function handleRemoveButton(card) {
     api.removeCard(card.getCardId())
     .then((data) => {
       card.removeCard();
+      formToRemove.close();
     })
     .catch(err => console.log('Неудача при удалении', err))
     .finally(() => {
       formToRemove.renderLoading(false);
-      formToRemove.close();
     })
   })
 }
