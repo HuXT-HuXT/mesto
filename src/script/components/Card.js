@@ -1,8 +1,3 @@
-/*import { photoPopup, photoPopupPhoto, photoPopupTitle } from "./constants.js";
-import { showPopup } from "./utils.js";*/
-
-import { id } from "postcss-selector-parser";
-
 export default class Card {
   constructor({ item,  handleCardClick, handleLikeButton, handleRemoveButton }, myOwnId) {
     this._name = item.name;

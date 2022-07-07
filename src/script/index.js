@@ -16,19 +16,6 @@ import Card from './components/Card.js'
 import Api from './components/Api.js'
 import { get } from 'lodash';
 
-function createCard(item) {
-  const card = new Card({
-    item: item,
-    handleCardClick: (name, link) => {
-      popupWithImage.open(name, link);
-    },
-    handleLikeButton: () => handleLikeButton(card),
-    handleRemoveButton: () => handleRemoveButton(card)
-  }, userInfo.getUserData().userId);
-  const cardElement = card.generateCard();
-  return cardElement;
-}
-
 const popupWithImage = new PopupWithImage(popupWithPictureSelector);
 
 popupWithImage.setEventListeners();
@@ -39,10 +26,12 @@ const formForEdit = new PopupWithForm({
   submitForm: (item) => {
     formForEdit.renderLoading(true);
     api.setUserData(item)
+      .then((data) => {
+        formForEdit.close()
+        userInfo.setUserData(item);
+      })
       .catch(err => console.log('Неудача при обновление данных', err))
       .finally(() => formForEdit.renderLoading(false))
-    formForEdit.close()
-    userInfo.setUserData(item);
   }
 },
 popupWithEditFormSelector);
@@ -56,9 +45,11 @@ const formForAdd = new PopupWithForm({
       .then(data => {
         cardList.prependItem(createCard(data));
       })
-      .catch(err => console.log('Неудача при добавлении', err))
-      .finally(() => formForAdd.renderLoading(false))
-    formForAdd.close();
+      .catch(err => console.log('Неудача при добавлении фоточки', err))
+      .finally(() => {
+        formForAdd.renderLoading(false);
+        formForAdd.close();
+      })
   }
 },
 popupWithAddFormSelector)
@@ -73,11 +64,14 @@ const formForAvatar = new PopupWithForm({
   submitForm: (item) => {
     formForAvatar.renderLoading(true);
     api.setUserAvatar(item)
+      .then((data) => {
+        userInfo.setUserAvatar(data);
+      })
       .catch(err => console.log('Неудача при обновление аватара', err))
-      .finally(() => formForAvatar.renderLoading(false))
-    userInfo.setUserAvatar(item)
-    console.log(item);
-    formForAvatar.close()
+      .finally(() => {
+        formForAvatar.renderLoading(false);
+        formForAvatar.close();
+      })
   }
 }, popupWithAvatarSelector)
 
@@ -92,27 +86,12 @@ validateForm(validationCriteria, avatarPopupForm);
 const api = new Api(apiSettings);
 
 const cardList = new Section({
-  items: [],
   renderer: (item) => {
     const cardElement = createCard(item);
-    return cardElement;
+    cardList.appendItem(cardElement);
   }
 },
 cardPlaceSelector);
-
-api.getInitialCards()
-  .then(data => {
-    for (let i=0; i < data.length; i++) {
-      cardList.appendItem(createCard(data[i]));
-    }
-  })
-
-api.getUserData()
-  .then(data => {
-    userInfo.setUserData(data);
-    userInfo.setUserAvatar(data);
-    userInfo.setUserId(data);
-  })
 
 profileButtonEdit.addEventListener('click', () => {
   formForEdit.open(userInfo.getUserData());
@@ -126,23 +105,34 @@ profileAvatarButton.addEventListener('click', () => {
   formForAvatar.open();
 })
 
-api.getInitialCards()
-  .then(data => console.log(data))
-
+function createCard(item) {
+  const card = new Card({
+    item: item,
+    handleCardClick: (name, link) => {
+      popupWithImage.open(name, link);
+    },
+    handleLikeButton: () => handleLikeButton(card),
+    handleRemoveButton: () => handleRemoveButton(card)
+  }, userInfo.getUserData().userId);
+  const cardElement = card.generateCard();
+  return cardElement;
+}
 
 function handleLikeButton(card) {
   if (card.checkLikeStatus()) {
-    card.dislike();
     api.dislikeCard(card.getCardId())
       .then(data => {
-        card.countLikes(data.likes)
+        card.countLikes(data.likes);
+        card.dislike();
       })
+      .catch((err) => console.log('Неудача приключилась при изменении отношения', err.message))
   } else {
-    card.like();
     api.likeCard(card.getCardId())
       .then(data => {
-        card.countLikes(data.likes)
+        card.countLikes(data.likes);
+        card.like();
       })
+      .catch((err) => console.log('Неудача приключилась при одобрении', err))
   }
 }
 
@@ -152,12 +142,24 @@ function handleRemoveButton(card) {
     formToRemove.renderLoading(true)
     api.removeCard(card.getCardId())
     .then((data) => {
-      console.log(data)
       card.removeCard();
-      formToRemove.close()
     })
-    .catch(err => console.log('Ошибка при удалении', err))
-    .finally(() => formToRemove.renderLoading(false))
+    .catch(err => console.log('Неудача при удалении', err))
+    .finally(() => {
+      formToRemove.renderLoading(false);
+      formToRemove.close();
+    })
   })
-
 }
+
+Promise.all([
+  api.getUserData(),
+  api.getInitialCards()
+])
+  .then(([ userData, InitialCards ]) => {
+    userInfo.setUserData(userData);
+    userInfo.setUserAvatar(userData);
+    userInfo.setUserId(userData);
+    cardList.renderItems(InitialCards);
+  })
+  .catch((err) => console.log(err))

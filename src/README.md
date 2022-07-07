@@ -1,6 +1,6 @@
 # Проект: Место
 
-description: exam work, 8th sprint;
+description: exam work, 9th sprint;
 
 ### Обзор
 
@@ -9,7 +9,8 @@ applied methods:
   - css - flex, grid, fonts & some fonts magic;
   - BAM - file & folders structure, class naming;
   - JS - form processing + validation, events listening, add new elements to html, modal windows. Work with classes.
-  - Webpack methods
+  - Webpack methods.
+  - Api has been added in order to get and save cards and user details.
 
 
 
