@@ -18,6 +18,8 @@ import { get } from 'lodash';
 
 const popupWithImage = new PopupWithImage(popupWithPictureSelector);
 
+//Спасибо за оперативную оценку моей работы и полезные комментарии!
+
 popupWithImage.setEventListeners();
 
 const userInfo = new UserInfo(profileSelector, userDataSelector);
