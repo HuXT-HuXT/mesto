@@ -158,10 +158,10 @@ Promise.all([
   api.getUserData(),
   api.getInitialCards()
 ])
-  .then(([ userData, InitialCards ]) => {
+  .then(([ userData, initialCards ]) => {
     userInfo.setUserData(userData);
     userInfo.setUserAvatar(userData);
     userInfo.setUserId(userData);
-    cardList.renderItems(InitialCards);
+    cardList.renderItems(initialCards);
   })
   .catch((err) => console.log(err))
